@@ -47,7 +47,7 @@ def super_im2col(transposed_padded_image, transposed_weights):
     for y in range(H):
         for x in range(W):
             im2col[:, :, y * W + x] = transposed_padded_image[:, y : y + KH, x : x + KW].reshape((CHANNELS, KW * KH))
-    return np.sum(transposed_weights @ im2col, axis=0).reshape((H, W))
+    return np.sum(np.matmul(transposed_weights, im2col), axis=0).reshape((H, W))
 
 def measure_function(function, name):
     start = time.process_time()
